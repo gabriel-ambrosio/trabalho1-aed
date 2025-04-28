@@ -9,6 +9,8 @@ int main() {
     listaReceitas = adidionarReceita(listaReceitas);
     listaReceitas = adidionarReceita(listaReceitas);
 
+    imprimeReceita(listaReceitas);
+
     
 
 

@@ -1,5 +1,5 @@
 struct ingrediente {
-    char nome[50];
+    char nome[200];
     struct ingrediente* proxIngrediente;
     struct ingrediente* antIngrediente;
 };
@@ -7,7 +7,7 @@ struct ingrediente {
 typedef struct ingrediente Ingrediente;
 
 struct receita {
-    char nome[50];
+    char nome[100];
     Ingrediente* listaIngredientes;
     struct receita *proxReceita;
 };
@@ -18,3 +18,4 @@ Receita* criaListaDeReceitasVazia();
 Ingrediente* criaListaDeIngredientesVazia();
 Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]);
 Receita* adidionarReceita(Receita* listaReceitas);
+void imprimeReceita(Receita* listaReceitas);

@@ -57,3 +57,45 @@ Receita* adidionarReceita(Receita* listaReceitas) {
     }
     return novaReceita;
 }
+
+void imprimeReceita(Receita* listaReceitas) {
+    if(listaReceitas == NULL) {
+        printf("Lista vazia!\n");
+    } else {
+        Receita* aux;
+        aux = listaReceitas;
+        printf("\nReceitas:\n");
+        while(aux != NULL) {
+            printf("%s\n", aux->nome);
+            aux = aux->proxReceita;
+        }
+
+        char seletor[50];
+        printf("\nDigite o nome da receita desejada: ");
+        scanf("%s", seletor);
+        setbuf(stdin, NULL);
+
+        aux = listaReceitas;
+        while(aux != NULL) {
+            if(strcmp(seletor, aux->nome) == 0) {
+                printf("\nReceita: %s\n", aux->nome);
+
+                Ingrediente* auxIngrediente;
+                auxIngrediente =  aux->listaIngredientes;
+
+                printf("Ingredientes:\n");
+                while(auxIngrediente != NULL) {
+                    printf("%s\n", auxIngrediente->nome);
+                    auxIngrediente = auxIngrediente->proxIngrediente;
+                }
+                break;
+            } else {
+                aux = aux->proxReceita;
+            }
+        }
+        if(aux == NULL) {
+            printf("Receita nao encontrada!\n");
+        }
+    }
+    
+}
