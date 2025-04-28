@@ -9,6 +9,6 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] adicionar receitas
 - [ ] modificar receitas
 - [x] printar receitas
-- [ ] remover receitas
+- [x] remover receitas
 - [ ] marcar ingredientes essenciais
 - [ ] receitas favoritas
