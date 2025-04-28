@@ -9,19 +9,6 @@ int main() {
     listaReceitas = adidionarReceita(listaReceitas);
     listaReceitas = adidionarReceita(listaReceitas);
 
-    printf("%s\n", listaReceitas->nome);
-    while(listaReceitas->listaIngredientes != NULL) {
-        printf("%s\n", listaReceitas->listaIngredientes->nome);
-        listaReceitas->listaIngredientes = listaReceitas->listaIngredientes->proxIngrediente;
-    }
-
-    listaReceitas = listaReceitas->proxReceita;
-    printf("%s\n", listaReceitas->nome);
-    while(listaReceitas->listaIngredientes != NULL) {
-        printf("%s\n", listaReceitas->listaIngredientes->nome);
-        listaReceitas->listaIngredientes = listaReceitas->listaIngredientes->proxIngrediente;
-    }
-
     
 
 
