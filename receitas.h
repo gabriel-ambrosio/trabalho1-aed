@@ -19,3 +19,6 @@ Ingrediente* criaListaDeIngredientesVazia();
 Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]);
 Receita* adidionarReceita(Receita* listaReceitas);
 void imprimeReceita(Receita* listaReceitas);
+void imprimeIngredientes(Receita* listaReceitas);
+void removeIngredientes(Receita* receita);
+Receita* removeReceita(Receita* listaReceitas);
