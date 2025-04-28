@@ -5,10 +5,10 @@ Tema:  Sistema de Receitas e Ingredientes
 
 ## RoadMap
 
-[X] structs
-[X] adicionar receitas
-[ ] modificar receitas
-[ ] printar receitas
-[ ] remover receitas
-[ ] marcar ingredientes essenciais
-[ ] receitas favoritas
+- [x] structs
+- [x] adicionar receitas
+- [ ] modificar receitas
+- [ ] printar receitas
+- [ ] remover receitas
+- [ ] marcar ingredientes essenciais
+- [ ] receitas favoritas
