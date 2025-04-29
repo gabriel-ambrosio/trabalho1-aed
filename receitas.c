@@ -30,11 +30,21 @@ Receita* adidionarReceita(Receita* listaReceitas) {
     Receita* novaReceita;
     novaReceita = (Receita *)malloc(sizeof(Receita));
 
-    char auxNome[50];
+    char auxNome[100];
     printf("\nDigite o nome da receita: ");
     scanf("%s", auxNome);
     setbuf(stdin, NULL);
     strcpy(novaReceita->nome, auxNome);
+
+    char favorita;
+    printf("Gostaria de marca-la como favorita?[s/n]\n");
+    scanf("%c", &favorita);
+    setbuf(stdin, NULL);
+    if (favorita == 's') {
+        novaReceita->favorita = 1;
+    } else {
+        novaReceita->favorita = 0;
+    }
 
     novaReceita->listaIngredientes = criaListaDeIngredientesVazia();
     int numIngredientes;
@@ -42,7 +52,7 @@ Receita* adidionarReceita(Receita* listaReceitas) {
     scanf("%d", &numIngredientes);
 
     for(int i = 0; i < numIngredientes; i++) {
-        char auxNome[50];
+        char auxNome[200];
         printf("\nDigite o nome do ingrediente: ");
         scanf("%s", auxNome);
         setbuf(stdin, NULL);
@@ -58,25 +68,44 @@ Receita* adidionarReceita(Receita* listaReceitas) {
     return novaReceita;
 }
 
-void imprimeReceita(Receita* listaReceitas) {
+void imprimeReceita(Receita* listaReceitas, int f) {
     if(listaReceitas == NULL) {
         printf("Lista vazia!\n");
     } else {
-        Receita* aux;
-        aux = listaReceitas;
-        printf("\nReceitas:\n");
-        while(aux != NULL) {
-            printf("%s\n", aux->nome);
-            aux = aux->proxReceita;
+        if(f == 1) {
+            Receita* aux;
+            aux = listaReceitas;
+
+            int c = 0;
+            printf("\nReceitas Favoritas:\n");
+            while(aux != NULL) {
+                if(aux->favorita == 1) {
+                    printf("%s\n", aux->nome);
+                    c++;
+                }
+                aux = aux->proxReceita;
+            }
+            if(c == 0) {
+                printf("Lista de favoritas vazia!\n");
+            }
+        } else {
+            Receita* aux;
+            aux = listaReceitas;
+            printf("\nReceitas:\n");
+            while(aux != NULL) {
+                printf("%s\n", aux->nome);
+                aux = aux->proxReceita;
+            }
+        
         }
     }
     
 }
 
 void imprimeIngredientes(Receita* listaReceitas) {
-    imprimeReceita(listaReceitas);
+    imprimeReceita(listaReceitas, 0);
 
-    char seletor[50];
+    char seletor[100];
     printf("\nDigite o nome da receita desejada: ");
     scanf("%s", seletor);
     setbuf(stdin, NULL);
@@ -120,9 +149,9 @@ Receita* removeReceita(Receita* listaReceitas) {
         return NULL;
     }
 
-    imprimeReceita(listaReceitas);
+    imprimeReceita(listaReceitas, 0);
 
-    char seletor[50];
+    char seletor[100];
     printf("\nDigite o nome da receita que deseja remover: ");
     scanf("%s", seletor);
     setbuf(stdin, NULL);
@@ -158,3 +187,31 @@ Receita* removeReceita(Receita* listaReceitas) {
         return listaReceitas;
     }
 }
+
+int modificaFavorita(Receita* listaReceitas, int f) {
+    imprimeReceita(listaReceitas, !f);
+
+    char seletor[100];
+    printf("Digite o nome da receita que deseja: ");
+    scanf("%s", seletor);
+    setbuf(stdin, NULL);
+
+    Receita* aux;
+    aux = listaReceitas;
+
+    while(aux != NULL) {
+        if(strcmp(aux->nome, seletor) == 0) {
+            break;
+        }
+        aux = aux->proxReceita;
+    }
+    if(aux == NULL) {
+        printf("Receita nao encontrada!\n");
+        return -1;
+    }
+
+    aux->favorita = f;
+
+    return 0;
+}
+

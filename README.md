@@ -11,4 +11,4 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] printar receitas
 - [x] remover receitas
 - [ ] marcar ingredientes essenciais
-- [ ] receitas favoritas
+- [x] receitas favoritas

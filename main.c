@@ -9,10 +9,12 @@ int main() {
     listaReceitas = adidionarReceita(listaReceitas);
     listaReceitas = adidionarReceita(listaReceitas);
 
-    listaReceitas = removeReceita(listaReceitas);
+    //listaReceitas = removeReceita(listaReceitas);
+    int teste = modificaFavorita(listaReceitas, 0);
+    imprimeReceita(listaReceitas, 1);
 
-    imprimeReceita(listaReceitas);
-
+    printf("\nlista completa\n");
+    imprimeReceita(listaReceitas, 0);
     
 
 
