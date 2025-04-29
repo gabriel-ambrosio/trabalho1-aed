@@ -13,3 +13,5 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] marcar ingredientes essenciais
 - [x] receitas favoritas
 - [ ] menu
+- [ ] comentarios
+- [ ] documento
