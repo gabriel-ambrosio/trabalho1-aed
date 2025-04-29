@@ -2,6 +2,7 @@ struct ingrediente {
     char nome[200];
     struct ingrediente* proxIngrediente;
     struct ingrediente* antIngrediente;
+    int essencial;
 };
 
 typedef struct ingrediente Ingrediente;
@@ -22,6 +23,8 @@ Receita* adidionarReceita(Receita* listaReceitas);
 void imprimeReceita(Receita* listaReceitas, int f);
 void imprimeIngredientes(Receita* listaReceitas);
 Receita* removeIngrediente(Receita* receita);
+void imprimeEssenciais(Receita* receita);
 void removeIngredientes(Receita* receita);
 Receita* removeReceita(Receita* listaReceitas);
 int modificaFavorita(Receita* listaReceitas, int f);
+int modificaEssencial(Receita* receita, int e);

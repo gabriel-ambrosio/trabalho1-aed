@@ -16,6 +16,19 @@ Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]
     novoIngrediente = (Ingrediente *)malloc(sizeof(Ingrediente));
     strcpy(novoIngrediente->nome, auxNome);
 
+    char e;
+    printf("Deseja marcar esse ingrediente como essencial?[s/n]: ");
+    scanf("%c", &e);
+
+    if(e == 's') {
+        novoIngrediente->essencial = 1;
+    } else if (e == 'n') {
+        novoIngrediente->essencial = 0;
+    } else {
+        printf("caractere invalido! ingrediente marcado como nao essencial.\n");
+        novoIngrediente->essencial = 0;
+    }
+
     if(listaIngredientes == NULL) {
         novoIngrediente->proxIngrediente = NULL;
         novoIngrediente->antIngrediente = NULL;
@@ -37,12 +50,15 @@ Receita* adidionarReceita(Receita* listaReceitas) {
     strcpy(novaReceita->nome, auxNome);
 
     char favorita;
-    printf("Gostaria de marca-la como favorita?[s/n]\n");
+    printf("Gostaria de marca-la como favorita?[s/n]: ");
     scanf("%c", &favorita);
     setbuf(stdin, NULL);
     if (favorita == 's') {
         novaReceita->favorita = 1;
+    } else if (favorita == 'n') {
+        novaReceita->favorita = 0;
     } else {
+        printf("caractere invalido! receita marcada como nao essencial.\n");
         novaReceita->favorita = 0;
     }
 
@@ -177,7 +193,21 @@ Receita* removeIngrediente(Receita* receita) {
 }
     
     
-
+void imprimeEssenciais(Receita* receita) {
+    if(receita == NULL || receita->listaIngredientes == NULL) {
+        printf("Lista vazia!\n");
+    } else {
+        Ingrediente* aux;
+        aux = receita->listaIngredientes;
+        printf("Ingredientes essenciais: ");
+        while(aux != NULL) {
+            if(aux->essencial) {
+                printf("%s\n", aux->nome);
+            }
+            aux = aux->proxIngrediente;
+        }
+    }
+}
 
 void removeIngredientes(Receita* receita) {
     Ingrediente* auxIngrediente;
@@ -256,6 +286,54 @@ int modificaFavorita(Receita* listaReceitas, int f) {
     }
 
     aux->favorita = f;
+
+    return 0;
+}
+
+int modificaEssencial(Receita* receita, int e) {
+    if(receita == NULL || receita->listaIngredientes == NULL) {
+        printf("Lista vazia!\n");
+        return -1;
+    }
+
+    Ingrediente* atual;
+    atual = receita->listaIngredientes;
+    if(e == 1) {
+        printf("Ingredientes:\n");
+        while(atual != NULL) {
+            printf("%s\n", atual->nome);
+            atual = atual->proxIngrediente;
+        }
+    } else {
+        printf("Ingredientes essenciais: \n");
+        while(atual != NULL) {
+            if(atual->essencial) {
+                printf("%s\n", atual->nome);
+                atual = atual->proxIngrediente;
+            }
+        }
+    }
+    
+
+    char seletor[200];
+    printf("Digite o nome do ingrediente que deseja: ");
+    scanf("%s", seletor);
+    setbuf(stdin, NULL);
+
+    atual = receita->listaIngredientes;
+
+    while(atual != NULL) {
+        if(strcmp(atual->nome, seletor) == 0) {
+            break;
+        }
+        atual = atual->proxIngrediente;
+    }
+    if(atual == NULL) {
+        printf("Ingrediente nao encontrado!\n");
+        return -1;
+    }
+
+    atual->essencial = e;
 
     return 0;
 }
