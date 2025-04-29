@@ -134,6 +134,51 @@ void imprimeIngredientes(Receita* listaReceitas) {
     }
 }
 
+
+Receita* removeIngrediente(Receita* receita) {
+    if(receita == NULL || receita->listaIngredientes == NULL) {
+        printf("Lista vazia!\n");
+        return receita;
+    }
+    Ingrediente* atual;
+    atual = receita->listaIngredientes;
+    printf("Ingredientes:\n");
+    while(atual != NULL) {
+        printf("%s\n", atual->nome);
+        atual = atual->proxIngrediente;
+    }
+    
+    char seletor[200];
+    printf("Digite o nome do ingrediente: ");
+    scanf("%s", seletor);
+    setbuf(stdin, NULL);
+
+    atual = receita->listaIngredientes;
+    if(strcmp(atual->nome, seletor) == 0) {
+        receita->listaIngredientes = receita->listaIngredientes->proxIngrediente;
+        receita->listaIngredientes->antIngrediente = NULL;
+        free(atual);
+        return receita;
+    } else {
+        while(atual != NULL) {
+            if(strcmp(atual->nome, seletor) == 0) {
+                atual->antIngrediente->proxIngrediente = atual->proxIngrediente;
+                atual->proxIngrediente->antIngrediente = atual->antIngrediente;
+                free(atual);
+                return receita; 
+            } else {
+                atual = atual->proxIngrediente;
+            }
+        }
+    }
+    printf("Ingrediente nao encontrado!\n");
+    return receita;
+    
+}
+    
+    
+
+
 void removeIngredientes(Receita* receita) {
     Ingrediente* auxIngrediente;
     while(receita->listaIngredientes != NULL) {

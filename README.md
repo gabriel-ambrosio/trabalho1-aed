@@ -7,8 +7,9 @@ Tema:  Sistema de Receitas e Ingredientes
 
 - [x] structs
 - [x] adicionar receitas
-- [ ] modificar receitas
+- [x] modificar receitas
 - [x] printar receitas
 - [x] remover receitas
 - [ ] marcar ingredientes essenciais
 - [x] receitas favoritas
+- [ ] menu

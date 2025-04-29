@@ -21,6 +21,7 @@ Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]
 Receita* adidionarReceita(Receita* listaReceitas);
 void imprimeReceita(Receita* listaReceitas, int f);
 void imprimeIngredientes(Receita* listaReceitas);
+Receita* removeIngrediente(Receita* receita);
 void removeIngredientes(Receita* receita);
 Receita* removeReceita(Receita* listaReceitas);
 int modificaFavorita(Receita* listaReceitas, int f);
