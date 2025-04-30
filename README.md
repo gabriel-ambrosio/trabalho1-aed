@@ -12,6 +12,7 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] remover receitas
 - [x] marcar ingredientes essenciais
 - [x] receitas favoritas
-- [ ] menu
+- [x] menu
 - [ ] comentarios
 - [ ] documento
+trabalha seus vagabundo

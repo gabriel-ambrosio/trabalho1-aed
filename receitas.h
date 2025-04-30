@@ -19,7 +19,7 @@ typedef struct receita Receita;
 Receita* criaListaDeReceitasVazia();
 Ingrediente* criaListaDeIngredientesVazia();
 Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]);
-Receita* adidionarReceita(Receita* listaReceitas);
+Receita* adicionarReceita(Receita* listaReceitas);
 void imprimeReceita(Receita* listaReceitas, int f);
 void imprimeIngredientes(Receita* listaReceitas);
 Receita* removeIngrediente(Receita* receita);
