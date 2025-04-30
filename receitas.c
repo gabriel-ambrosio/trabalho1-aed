@@ -4,11 +4,11 @@
 #include "receitas.h"
 
 Receita* criaListaDeReceitasVazia() {
-    return NULL;
+    return NULL; // incia a lista de receitas
 }
 
 Ingrediente* criaListaDeIngredientesVazia() {
-    return NULL;
+    return NULL; // incia a lista de ingredientes
 }
 
 Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]) {
@@ -21,15 +21,15 @@ Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]
     scanf("%c", &e);
 
     if(e == 's') {
-        novoIngrediente->essencial = 1;
+        novoIngrediente->essencial = 1; // valor 1 representa que o ingrediente eh essencial
     } else if (e == 'n') {
-        novoIngrediente->essencial = 0;
+        novoIngrediente->essencial = 0; 
     } else {
         printf("caractere invalido! ingrediente marcado como nao essencial.\n");
-        novoIngrediente->essencial = 0;
+        novoIngrediente->essencial = 0; // assume que n eh favorita
     }
 
-    if(listaIngredientes == NULL) {
+    if(listaIngredientes == NULL) { // lista vazia
         novoIngrediente->proxIngrediente = NULL;
         novoIngrediente->antIngrediente = NULL;
     } else {
@@ -39,7 +39,7 @@ Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]
     return novoIngrediente;
 }
 
-Receita* adicionarReceita(Receita* listaReceitas) {
+Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
     Receita* novaReceita;
     novaReceita = (Receita *)malloc(sizeof(Receita));
 
@@ -67,13 +67,13 @@ Receita* adicionarReceita(Receita* listaReceitas) {
     printf("Digite o numero de ingredientes: ");
     scanf("%d", &numIngredientes);
 
-    for(int i = 0; i < numIngredientes; i++) {
+    for(int i = 0; i < numIngredientes; i++) { // loop para receber todos os ingredientes 
         char auxNome[200];
         printf("\nDigite o nome do ingrediente: ");
         scanf("%s", auxNome);
         setbuf(stdin, NULL);
 
-        novaReceita->listaIngredientes = adicionarIngrediente(novaReceita->listaIngredientes, auxNome);
+        novaReceita->listaIngredientes = adicionarIngrediente(novaReceita->listaIngredientes, auxNome); //adiciona um ingrendiente a receita
         printf("Ingrediente adicionado!\n");
     }
     if(listaReceitas == NULL) {
@@ -95,7 +95,7 @@ void imprimeReceita(Receita* listaReceitas, int f) {
             int c = 0;
             printf("\nReceitas Favoritas:\n");
             while(aux != NULL) {
-                if(aux->favorita == 1) {
+                if(aux->favorita == 1) { //verifica se tem receitas favoritas e impirme 
                     printf("%s\n", aux->nome);
                     c++;
                 }
@@ -108,7 +108,7 @@ void imprimeReceita(Receita* listaReceitas, int f) {
             Receita* aux;
             aux = listaReceitas;
             printf("\nReceitas:\n");
-            while(aux != NULL) {
+            while(aux != NULL) { //imprime todas as receitas
                 printf("%s\n", aux->nome);
                 aux = aux->proxReceita;
             }
@@ -118,7 +118,7 @@ void imprimeReceita(Receita* listaReceitas, int f) {
     
 }
 
-void imprimeIngredientes(Receita* listaReceitas) {
+void imprimeIngredientes(Receita* listaReceitas) { //imprime os ingredientes de uma receita desejada
     imprimeReceita(listaReceitas, 0);
     if(listaReceitas != NULL) {
         char seletor[100];
@@ -134,13 +134,13 @@ void imprimeIngredientes(Receita* listaReceitas) {
 
                 Ingrediente* auxIngrediente;
                 auxIngrediente =  aux->listaIngredientes;
-                if(auxIngrediente == NULL) {
+                if(auxIngrediente == NULL) { //verifica se a lista apresenta ingredientes
                     printf("Receita sem ingredientes. Adione e tente novamente!\n\n");
                     break;
                 }
                 printf("Ingredientes:\n");
                 while(auxIngrediente != NULL) {
-                    printf("%s\n", auxIngrediente->nome);
+                    printf("%s\n", auxIngrediente->nome); //imprime o ingrediente
                     auxIngrediente = auxIngrediente->proxIngrediente;
                 }
                 break;
