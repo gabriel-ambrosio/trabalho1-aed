@@ -6,7 +6,7 @@
 int main() {
     Receita* listaReceitas;         // Ponteiro para a lista de receitas
     listaReceitas = criaListaDeReceitasVazia(); // Inicializa lista vazia
-    int menu = 1;                   // Variável para controle do menu
+    int menu = 1;                   // Variavel para controle do menu
     int c = 0;                      // Contador auxiliar
     char auxNome[100];              // Buffer para nomes de receitas
     char nomeIngrediente[200];      // Buffer para nomes de ingredientes
