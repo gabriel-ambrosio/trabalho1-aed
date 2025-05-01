@@ -1,17 +1,17 @@
 struct ingrediente {
-    char nome[200];
-    struct ingrediente* proxIngrediente;
-    struct ingrediente* antIngrediente;
-    int essencial;
+    char nome[200]; // Nome do ingrediente
+    struct ingrediente* proxIngrediente; // Ponteiro para o proximo ingrediente
+    struct ingrediente* antIngrediente; // Ponteiro para o ingrediente anterior
+    int essencial; // Indicar se eh essencial (1) ou não (0)
 };
 
 typedef struct ingrediente Ingrediente;
 
 struct receita {
-    char nome[100];
-    Ingrediente* listaIngredientes;
-    struct receita *proxReceita;
-    int favorita;
+    char nome[100]; // Nome da receita
+    Ingrediente* listaIngredientes; // Ponteiro para a lista de ingredientes
+    struct receita *proxReceita; // Ponteiro para a proxima receita
+    int favorita; // Indicar se eh favorita (1) ou não (0)
 };
 
 typedef struct receita Receita; 
