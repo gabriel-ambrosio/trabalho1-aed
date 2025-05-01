@@ -4,13 +4,14 @@
 #include "receitas.h"
 
 int main() {
-    Receita* listaReceitas;
-    listaReceitas = criaListaDeReceitasVazia();
-    int menu = 1;
-    int c = 0;
-    char auxNome[100];
-    char nomeIngrediente[200];
-    Receita* auxReceita;
+    Receita* listaReceitas;         // Ponteiro para a lista de receitas
+    listaReceitas = criaListaDeReceitasVazia(); // Inicializa lista vazia
+    int menu = 1;                   // Variável para controle do menu
+    int c = 0;                      // Contador auxiliar
+    char auxNome[100];              // Buffer para nomes de receitas
+    char nomeIngrediente[200];      // Buffer para nomes de ingredientes
+    Receita* auxReceita;            // Ponteiro auxiliar para navegar nas receitas
+
 
     while(menu) {
         printf("\n\n-----------------------------------------------");
