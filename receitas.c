@@ -175,7 +175,7 @@ Receita* removeIngrediente(Receita* receita) {
         printf("%s\n", atual->nome);
         atual = atual->proxIngrediente;
     }
-    
+    // Solicita qual ingrediente remover
     char seletor[200];
     printf("Digite o nome do ingrediente: ");
     scanf("%s", seletor);
@@ -249,7 +249,7 @@ Receita* removeReceita(Receita* listaReceitas) {
     printf("\nDigite o nome da receita que deseja remover: ");
     scanf("%s", seletor);
     setbuf(stdin, NULL);
-
+    // Caso especial: remover o primeiro elemento
     if(strcmp(listaReceitas->nome, seletor) == 0) {
         Receita* aux;
         aux = listaReceitas;
@@ -258,7 +258,7 @@ Receita* removeReceita(Receita* listaReceitas) {
         printf("Receita removida!\n");
         return listaReceitas;
     }
-
+    // Procura a receita na lista
     Receita* aux1;
     Receita* aux2;
     aux1 = listaReceitas;
@@ -338,14 +338,14 @@ int modificaEssencial(Receita* receita, int e) {
         }
     }
     
-
+    // Solicita qual ingrediente modificar
     char seletor[200];
     printf("Digite o nome do ingrediente que deseja: ");
     scanf("%s", seletor);
     setbuf(stdin, NULL);
 
     atual = receita->listaIngredientes;
-
+    // Procura o ingrediente
     while(atual != NULL) {
         if(strcmp(atual->nome, seletor) == 0) {
             break;
@@ -356,7 +356,7 @@ int modificaEssencial(Receita* receita, int e) {
         printf("Ingrediente nao encontrado!\n");
         return -1;
     }
-
+    // Modifica o status
     atual->essencial = e;
 
     return 0;
