@@ -3,14 +3,17 @@
 #include <string.h>
 #include "receitas.h"
 
+/* Inicializa uma lista vazia de receitas */
 Receita* criaListaDeReceitasVazia() {
     return NULL; // incia a lista de receitas
 }
 
+/* Inicializa uma lista vazia de ingredientes */
 Ingrediente* criaListaDeIngredientesVazia() {
     return NULL; // incia a lista de ingredientes
 }
 
+/* Adiciona um novo ingrediente a lista */
 Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]) {
     Ingrediente* novoIngrediente;
     novoIngrediente = (Ingrediente *)malloc(sizeof(Ingrediente));
@@ -39,6 +42,7 @@ Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]
     return novoIngrediente;
 }
 
+/* Adiciona uma nova receita a lista */
 Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
     Receita* novaReceita;
     novaReceita = (Receita *)malloc(sizeof(Receita));
@@ -84,6 +88,7 @@ Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
     return novaReceita;
 }
 
+/* Imprime a lista de receitas (todas ou apenas favoritas) */
 void imprimeReceita(Receita* listaReceitas, int f) {
     if(listaReceitas == NULL) {
         printf("Lista vazia. Adicione receitas na lista e tente novamente!\n\n");
@@ -118,7 +123,8 @@ void imprimeReceita(Receita* listaReceitas, int f) {
     
 }
 
-void imprimeIngredientes(Receita* listaReceitas) { //imprime os ingredientes de uma receita desejada
+/* Imprime os ingredientes de uma receita especifica */
+void imprimeIngredientes(Receita* listaReceitas) { 
     imprimeReceita(listaReceitas, 0);
     if(listaReceitas != NULL) {
         char seletor[100];
@@ -156,7 +162,7 @@ void imprimeIngredientes(Receita* listaReceitas) { //imprime os ingredientes de 
     
 }
 
-
+/* Remove um ingrediente de uma receita */
 Receita* removeIngrediente(Receita* receita) {
     if(receita == NULL || receita->listaIngredientes == NULL) {
         printf("Lista vazia!\n");
@@ -198,7 +204,7 @@ Receita* removeIngrediente(Receita* receita) {
     
 }
     
-    
+/* Imprime apenas os ingredientes essenciais de uma receita */
 void imprimeEssenciais(Receita* receita) {
     if(receita == NULL || receita->listaIngredientes == NULL) {
         printf("Lista vazia!\n");
@@ -220,6 +226,7 @@ void imprimeEssenciais(Receita* receita) {
     }
 }
 
+/* Remove todos os ingredientes de uma receita (função auxiliar) */
 void removeIngredientes(Receita* receita) {
     Ingrediente* auxIngrediente;
     while(receita->listaIngredientes != NULL) {
@@ -229,6 +236,7 @@ void removeIngredientes(Receita* receita) {
     }
 }
 
+/* Remove uma receita da lista */
 Receita* removeReceita(Receita* listaReceitas) {
     if(listaReceitas == NULL) {
         printf("Lista vazia. Adicione elementos e tente novamente!\n");
@@ -274,6 +282,7 @@ Receita* removeReceita(Receita* listaReceitas) {
     }
 }
 
+/* Modifica o status de favorito de uma receita */
 int modificaFavorita(Receita* listaReceitas, int f) {
     imprimeReceita(listaReceitas, !f);
 
@@ -304,6 +313,7 @@ int modificaFavorita(Receita* listaReceitas, int f) {
     return 0;
 }
 
+/* Modifica o status de essencial de um ingrediente */
 int modificaEssencial(Receita* receita, int e) {
     if(receita == NULL || receita->listaIngredientes == NULL) {
         printf("Lista vazia!\n");
