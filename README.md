@@ -13,8 +13,8 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] marcar ingredientes essenciais
 - [x] receitas favoritas
 - [x] menu
-- [ ] comentarios
-- [ ] documento
+- [x] comentarios
+- [x] documento
 
 
 trabalha seus vagabundo
