@@ -508,7 +508,7 @@ Receita* listaExemplo(Receita* listaReceitas) {
     novoIngrediente9->proxIngrediente = NULL;
     novoIngrediente8->proxIngrediente = novoIngrediente9;
 
-
+    // receita 3
     Receita* novaReceita3;
     novaReceita3 = (Receita *)malloc(sizeof(Receita));
     novaReceita3->favorita = 0;
