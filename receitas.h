@@ -1,5 +1,6 @@
 struct ingrediente {
     char nome[200]; // Nome do ingrediente
+    char quantidade[100]; // quantidade do ingrediente (string para admitir diversas nomenclaturas)
     struct ingrediente* proxIngrediente; // Ponteiro para o proximo ingrediente
     struct ingrediente* antIngrediente; // Ponteiro para o ingrediente anterior
     int essencial; // Indicar se eh essencial (1) ou não (0)
@@ -18,7 +19,7 @@ typedef struct receita Receita;
 
 Receita* criaListaDeReceitasVazia();
 Ingrediente* criaListaDeIngredientesVazia();
-Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]);
+Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[], char auxMedida[]);
 Receita* adicionarReceita(Receita* listaReceitas);
 void imprimeReceita(Receita* listaReceitas, int f);
 void imprimeIngredientes(Receita* listaReceitas);
@@ -28,3 +29,5 @@ void removeIngredientes(Receita* receita);
 Receita* removeReceita(Receita* listaReceitas);
 int modificaFavorita(Receita* listaReceitas, int f);
 int modificaEssencial(Receita* receita, int e);
+int buscarTodosIngredientes(Receita* listaReceitas);
+Receita* listaExemplo(Receita* listaReceitas);

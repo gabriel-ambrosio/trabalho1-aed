@@ -16,5 +16,3 @@ Tema:  Sistema de Receitas e Ingredientes
 - [x] comentarios
 - [x] documento
 
-
-trabalha seus vagabundo

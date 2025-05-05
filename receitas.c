@@ -14,10 +14,11 @@ Ingrediente* criaListaDeIngredientesVazia() {
 }
 
 /* Adiciona um novo ingrediente a lista */
-Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[]) {
+Ingrediente* adicionarIngrediente(Ingrediente* listaIngredientes, char auxNome[], char auxMedida[]) {
     Ingrediente* novoIngrediente;
     novoIngrediente = (Ingrediente *)malloc(sizeof(Ingrediente));
     strcpy(novoIngrediente->nome, auxNome);
+    strcpy(novoIngrediente->quantidade, auxMedida);
 
     char e;
     printf("Deseja marcar esse ingrediente como essencial?[s/n]: ");
@@ -72,12 +73,16 @@ Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
     scanf("%d", &numIngredientes);
 
     for(int i = 0; i < numIngredientes; i++) { // loop para receber todos os ingredientes 
-        char auxNome[200];
+        char auxNome[200], auxMedida[200];
         printf("\nDigite o nome do ingrediente: ");
         scanf(" %[^\n]", auxNome);
         setbuf(stdin, NULL);
 
-        novaReceita->listaIngredientes = adicionarIngrediente(novaReceita->listaIngredientes, auxNome); //adiciona um ingrendiente a receita
+        printf("\nDigite a quantidade e medida do ingrediente: ");
+        scanf(" %[^\n]", auxMedida);
+        setbuf(stdin, NULL);
+
+        novaReceita->listaIngredientes = adicionarIngrediente(novaReceita->listaIngredientes, auxNome, auxMedida); //adiciona um ingrendiente a receita
         printf("Ingrediente adicionado!\n");
     }
     if(listaReceitas == NULL) {
@@ -147,7 +152,7 @@ void imprimeIngredientes(Receita* listaReceitas) {
                 }
                 printf("Ingredientes:\n");
                 while(auxIngrediente != NULL) {
-                    printf("%s\n", auxIngrediente->nome); //imprime o ingrediente
+                    printf("%s de %s\n", auxIngrediente->quantidade, auxIngrediente->nome); //imprime o ingrediente
                     auxIngrediente = auxIngrediente->proxIngrediente;
                 }
                 break;
@@ -216,7 +221,7 @@ void imprimeEssenciais(Receita* receita) {
         printf("Ingredientes essenciais: ");
         while(aux != NULL) {
             if(aux->essencial) {
-                printf("\n%s", aux->nome);
+                printf("\n%s de %s", aux->quantidade, aux->nome);
                 c++;
             }
             aux = aux->proxIngrediente;
@@ -256,6 +261,7 @@ Receita* removeReceita(Receita* listaReceitas) {
         Receita* aux;
         aux = listaReceitas;
         listaReceitas = listaReceitas->proxReceita;
+        removeIngredientes(aux);
         free(aux);
         printf("Receita removida!\n");
         return listaReceitas;
@@ -366,3 +372,151 @@ int modificaEssencial(Receita* receita, int e) {
     return 0;
 }
 
+// funcao que busca um ingrediente dentre todos os ingredientes de todas as receitas
+int buscarTodosIngredientes(Receita* listaReceitas) {
+    // nao faz nada se a lista de receitas estiver vazia
+    if(listaReceitas == NULL) {
+        printf("Lista vazia! Adicione receitas e tente novamente.\n");
+        return -1;
+    }
+
+    int c = 0; // controle
+
+    // pega o ingrediente desejado
+    char auxNomeIngrediente[200];
+    printf("Digite o nome do ingrediente desejado: ");
+    scanf(" %[^\n]", auxNomeIngrediente);
+    setbuf(stdin, NULL);
+
+    Receita* aux = listaReceitas;
+    printf("Receitas com %s:\n", auxNomeIngrediente);
+    // while duplo para vasculhar tudo (while exterior anda pelas receitas e o interior pelos ingredientes)
+    while(aux != NULL) {
+        Ingrediente* auxListaIngredientes = aux->listaIngredientes;
+        while(auxListaIngredientes != NULL) {
+            if (strcmp(auxNomeIngrediente, auxListaIngredientes->nome) == 0) {
+                printf("%s\n", aux->nome);
+                c++; // add o controle para mostrar que existe o ingrediente na lista de receitas
+            }
+            auxListaIngredientes = auxListaIngredientes->proxIngrediente;
+        }
+        aux = aux->proxReceita;
+    }
+    // caso o int de controle continue igual a zero, significa que nenhum ingrediente compativel foi encontrado
+    if(c == 0) {
+        printf("Nao foi encontrada nenhuma receita com este ingrediente.\n");
+        return -1;
+    }
+    return 0;
+
+}
+// funcao que carrega lista de exemplo feita de ultima hora
+Receita* listaExemplo(Receita* listaReceitas) {
+    //3 ingredientes pra receita 1
+    Ingrediente* novoIngrediente1;
+    novoIngrediente1 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente1->quantidade, "2 xicaras(cha)");
+    strcpy(novoIngrediente1->nome, "acucar");
+    novoIngrediente1->essencial = 1;
+    novoIngrediente1->antIngrediente = NULL;
+
+    Ingrediente* novoIngrediente2;
+    novoIngrediente2 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente2->quantidade, "4 unidades");
+    strcpy(novoIngrediente2->nome, "ovo");
+    novoIngrediente2->essencial = 0;
+    novoIngrediente2->antIngrediente = novoIngrediente1;
+    novoIngrediente2->proxIngrediente = NULL;
+    novoIngrediente1->proxIngrediente = novoIngrediente2;
+
+    Ingrediente* novoIngrediente3;
+    novoIngrediente3 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente3->quantidade, "2 colheres(sopa)");
+    strcpy(novoIngrediente3->nome, "fermento");
+    novoIngrediente3->essencial = 0;
+    novoIngrediente3->antIngrediente = novoIngrediente2;
+    novoIngrediente3->proxIngrediente = NULL;
+    novoIngrediente2->proxIngrediente = novoIngrediente3;
+
+    // receita 1
+    Receita* novaReceita1;
+    novaReceita1 = (Receita *)malloc(sizeof(Receita));
+    novaReceita1->favorita = 1;
+    strcpy(novaReceita1->nome, "bolo de chocolate");
+    novaReceita1->proxReceita = NULL;
+    novaReceita1->listaIngredientes = criaListaDeIngredientesVazia();
+    novaReceita1->listaIngredientes = novoIngrediente1;
+
+    // 3 ingredientes pra receita 2
+    Ingrediente* novoIngrediente4;
+    novoIngrediente4 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente4->quantidade, "350g");
+    strcpy(novoIngrediente4->nome, "mascarpone");
+    novoIngrediente4->essencial = 0;
+    novoIngrediente4->antIngrediente = NULL;
+
+    Ingrediente* novoIngrediente5;
+    novoIngrediente5 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente5->quantidade, "2 unidades");
+    strcpy(novoIngrediente5->nome, "ovo");
+    novoIngrediente5->essencial = 0;
+    novoIngrediente5->antIngrediente = novoIngrediente4;
+    novoIngrediente5->proxIngrediente = NULL;
+    novoIngrediente4->proxIngrediente = novoIngrediente5;
+
+    Ingrediente* novoIngrediente6;
+    novoIngrediente6 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente6->quantidade, "3/4 de xicara(cha)");
+    strcpy(novoIngrediente6->nome, "cafe");
+    novoIngrediente6->essencial = 1;
+    novoIngrediente6->antIngrediente = novoIngrediente5;
+    novoIngrediente6->proxIngrediente = NULL;
+    novoIngrediente5->proxIngrediente = novoIngrediente6;
+
+    // receita 2
+    Receita* novaReceita2;
+    novaReceita2 = (Receita *)malloc(sizeof(Receita));
+    novaReceita2->favorita = 0;
+    strcpy(novaReceita2->nome, "tiramisu");
+    novaReceita2->proxReceita = novaReceita1;
+    novaReceita2->listaIngredientes = criaListaDeIngredientesVazia();
+    novaReceita2->listaIngredientes = novoIngrediente4;
+
+    // 3 ingredientes pra receita 3
+    Ingrediente* novoIngrediente7;
+    novoIngrediente7 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente7->quantidade, "1/2 xicara");
+    strcpy(novoIngrediente7->nome, "acucar");
+    novoIngrediente7->essencial = 0;
+    novoIngrediente7->antIngrediente = NULL;
+
+    Ingrediente* novoIngrediente8;
+    novoIngrediente8 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente8->quantidade, "125g");
+    strcpy(novoIngrediente8->nome, "manteiga");
+    novoIngrediente8->essencial = 0;
+    novoIngrediente8->antIngrediente = novoIngrediente7;
+    novoIngrediente8->proxIngrediente = NULL;
+    novoIngrediente7->proxIngrediente = novoIngrediente8;
+
+    Ingrediente* novoIngrediente9;
+    novoIngrediente9 = (Ingrediente *)malloc(sizeof(Ingrediente));
+    strcpy(novoIngrediente9->quantidade, "1 e 3/4 xicaras");
+    strcpy(novoIngrediente9->nome, "farinha de trigo");
+    novoIngrediente9->essencial = 0;
+    novoIngrediente9->antIngrediente = novoIngrediente8;
+    novoIngrediente9->proxIngrediente = NULL;
+    novoIngrediente8->proxIngrediente = novoIngrediente9;
+
+
+    Receita* novaReceita3;
+    novaReceita3 = (Receita *)malloc(sizeof(Receita));
+    novaReceita3->favorita = 0;
+    strcpy(novaReceita3->nome, "cookie");
+    novaReceita3->proxReceita = novaReceita2;
+    novaReceita3->listaIngredientes = criaListaDeIngredientesVazia();
+    novaReceita3->listaIngredientes = novoIngrediente7;
+
+    listaReceitas = novaReceita3;
+    return listaReceitas;
+}
