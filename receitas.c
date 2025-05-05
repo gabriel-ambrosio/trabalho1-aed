@@ -49,7 +49,7 @@ Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
 
     char auxNome[100];
     printf("\nDigite o nome da receita: ");
-    scanf("%s", auxNome);
+    scanf(" %[^\n]", auxNome);
     setbuf(stdin, NULL);
     strcpy(novaReceita->nome, auxNome);
 
@@ -74,7 +74,7 @@ Receita* adicionarReceita(Receita* listaReceitas) { // adiciona uma receita
     for(int i = 0; i < numIngredientes; i++) { // loop para receber todos os ingredientes 
         char auxNome[200];
         printf("\nDigite o nome do ingrediente: ");
-        scanf("%s", auxNome);
+        scanf(" %[^\n]", auxNome);
         setbuf(stdin, NULL);
 
         novaReceita->listaIngredientes = adicionarIngrediente(novaReceita->listaIngredientes, auxNome); //adiciona um ingrendiente a receita
@@ -129,7 +129,8 @@ void imprimeIngredientes(Receita* listaReceitas) {
     if(listaReceitas != NULL) {
         char seletor[100];
         printf("\nDigite o nome da receita desejada: ");
-        scanf("%s", seletor);
+        scanf(" %[^\n]", seletor);
+
         setbuf(stdin, NULL);
 
         Receita* aux;
@@ -178,7 +179,7 @@ Receita* removeIngrediente(Receita* receita) {
     // Solicita qual ingrediente remover
     char seletor[200];
     printf("Digite o nome do ingrediente: ");
-    scanf("%s", seletor);
+    scanf(" %[^\n]", seletor);
     setbuf(stdin, NULL);
 
     atual = receita->listaIngredientes;
@@ -247,7 +248,8 @@ Receita* removeReceita(Receita* listaReceitas) {
 
     char seletor[100];
     printf("\nDigite o nome da receita que deseja remover: ");
-    scanf("%s", seletor);
+    scanf(" %[^\n]", seletor);
+
     setbuf(stdin, NULL);
     // Caso especial: remover o primeiro elemento
     if(strcmp(listaReceitas->nome, seletor) == 0) {
@@ -291,7 +293,8 @@ int modificaFavorita(Receita* listaReceitas, int f) {
     }
     char seletor[100];
     printf("Digite o nome da receita que deseja: ");
-    scanf("%s", seletor);
+    scanf(" %[^\n]", seletor);
+
     setbuf(stdin, NULL);
 
     Receita* aux;
@@ -341,7 +344,8 @@ int modificaEssencial(Receita* receita, int e) {
     // Solicita qual ingrediente modificar
     char seletor[200];
     printf("Digite o nome do ingrediente que deseja: ");
-    scanf("%s", seletor);
+    scanf(" %[^\n]", seletor);
+
     setbuf(stdin, NULL);
 
     atual = receita->listaIngredientes;

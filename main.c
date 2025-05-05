@@ -36,11 +36,11 @@ int main() {
                     break;
                 }
                 printf("Digite o nome da receita desejada: ");
-                scanf("%s", auxNome);
+                scanf(" %[^\n]", auxNome);
                 setbuf(stdin, NULL);
 
                 printf("Digite o nome do ingrediente a ser adicionado: ");
-                scanf("%s", nomeIngrediente);
+                scanf(" %[^\n]", nomeIngrediente);
                 setbuf(stdin, NULL);
 
                 auxReceita = listaReceitas;
@@ -79,7 +79,7 @@ int main() {
                     break;
                 }
                 printf("Digite o nome da receita desejada: ");
-                scanf("%s", auxNome);
+                scanf(" %[^\n]", auxNome);
                 setbuf(stdin, NULL);
 
                 auxReceita = listaReceitas;
@@ -118,7 +118,7 @@ int main() {
                     break;
                 }
                 printf("Digite o nome da receita desejada: ");
-                scanf("%s", auxNome);
+                scanf(" %[^\n]", auxNome);
                 setbuf(stdin, NULL);
 
                 auxReceita = listaReceitas;
@@ -140,7 +140,7 @@ int main() {
                     break;
                 }
                 printf("Digite o nome da receita desejada: ");
-                scanf("%s", auxNome);
+                scanf(" %[^\n]", auxNome);
                 setbuf(stdin, NULL);
 
                 auxReceita = listaReceitas;
@@ -165,7 +165,7 @@ int main() {
                     break;
                 }
                 printf("Digite o nome da receita desejada: ");
-                scanf("%s", auxNome);
+                scanf(" %[^\n]", auxNome);
                 setbuf(stdin, NULL);
 
                 auxReceita = listaReceitas;
