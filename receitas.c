@@ -520,3 +520,70 @@ Receita* listaExemplo(Receita* listaReceitas) {
     listaReceitas = novaReceita3;
     return listaReceitas;
 }
+
+/* Lista todos os ingredientes essenciais*/
+void listarTodosEssenciais(Receita* listaReceitas) {
+    // se a lista estiver vazia
+    if(listaReceitas == NULL) {
+        printf("Lista de receitas vazia!\n");
+        return;
+    }
+    
+    int encontrou = 0;
+    Receita* auxReceita = listaReceitas;
+    
+    printf("\nIngredientes essenciais de todas as receitas:\n");
+    
+    while(auxReceita != NULL) {
+        //percorre a lista
+        Ingrediente* auxIngrediente = auxReceita->listaIngredientes;
+        while(auxIngrediente != NULL) {
+            if(auxIngrediente->essencial) {
+                //mostra o ingrediente essencial e a sua receita de origem
+                printf("- %s de %s (Receita: %s)\n", 
+                       auxIngrediente->quantidade, 
+                       auxIngrediente->nome,
+                       auxReceita->nome);
+                encontrou = 1;
+            }
+            auxIngrediente = auxIngrediente->proxIngrediente;
+        }
+        auxReceita = auxReceita->proxReceita;
+    }
+    //caso noa tenha nenhum ingrediente essencial em todas receitas
+    if(encontrou == 0) {
+        printf("Nenhum ingrediente essencial encontrado em todas as receitas.\n");
+    }
+}
+
+/* Lista todos os ingredientes presentes*/
+void listarTodosIngredientes(Receita* listaReceitas) {
+    // se a lista estiver vazia
+    if(listaReceitas == NULL) {
+        printf("Lista de receitas vazia!\n");
+        return;
+    }
+    
+    int encontrou = 0;
+    Receita* auxReceita = listaReceitas;
+    
+    printf("\nIngredientes de todas as receitas:\n");
+    while(auxReceita != NULL) {
+        //percorre a lista
+        Ingrediente* auxIngrediente = auxReceita->listaIngredientes;
+        while(auxIngrediente != NULL) {
+            //mostra os ingredientes e a sua receita de origem
+            printf("- %s de %s (Receita: %s)\n", 
+                auxIngrediente->quantidade, 
+                auxIngrediente->nome,
+                auxReceita->nome);
+            encontrou = 1;
+            auxIngrediente = auxIngrediente->proxIngrediente;
+        }
+        auxReceita = auxReceita->proxReceita;
+    }
+    //caso noa tenha nenhum ingrediente essencial em todas receitas
+    if(encontrou == 0) {
+        printf("Nenhum ingrediente encontrado em todas as receitas.\n");
+    }
+}
