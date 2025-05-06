@@ -31,3 +31,5 @@ int modificaFavorita(Receita* listaReceitas, int f);
 int modificaEssencial(Receita* receita, int e);
 int buscarTodosIngredientes(Receita* listaReceitas);
 Receita* listaExemplo(Receita* listaReceitas);
+void listarTodosEssenciais(Receita* listaReceitas);
+void listarTodosIngredientes(Receita* listaReceitas);
