@@ -20,7 +20,7 @@ int main() {
         printf("\n-----------------------------------------------\n\n");
 
         printf("1.  Adicionar Receita\n2.  Adicionar Ingrediente\n3.  Ver Todas as Receitas\n4.  Ver Receitas Favoritas\n5.  Ver Ingredientes de Uma Receita\n6.  Ver Ingredientes Essenciais de Uma Receita");
-        printf("\n7.  Adicionar Receita as Favoritas\n8.  Retirar Receita das Favoritas\n9.  Adicionar Ingrediente aos Essenciais\n10. Retirar Ingrediente dos Essenciais\n11. Remover Receita\n12. Remover Ingrediente\n13. Buscar Ingrediente em Todas as Receitas\n14. Carregar lista de Exemplo\n15. Sair");
+        printf("\n7.  Adicionar Receita as Favoritas\n8.  Retirar Receita das Favoritas\n9.  Adicionar Ingrediente aos Essenciais\n10. Retirar Ingrediente dos Essenciais\n11. Remover Receita\n12. Remover Ingrediente\n13. Buscar Ingrediente em Todas as Receitas\n14. Carregar lista de Exemplo\n15. Listar todos ingredientes essenciais\n16. Listar todos ingredientes\n17. Sair");
         printf("\n\nEscolha sua opcao: ");
         scanf("%d", &menu);
 
