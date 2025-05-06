@@ -191,8 +191,16 @@ int main() {
                 listaReceitas = listaExemplo(listaReceitas);
                 printf("Lista carregada!\n");
                 break;
-
+            
             case 15:
+                listarTodosEssenciais(listaReceitas);
+                break;
+                
+            case 16:
+                listarTodosIngredientes(listaReceitas);
+                break;
+                
+            case 17:
                 printf("Ate mais!");
                 menu = 0;
                 break;
